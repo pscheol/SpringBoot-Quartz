@@ -1,0 +1,42 @@
+
+# org.quartz.scheduler.instanceName 와 동일
+spring:
+  quartz:
+    scheduler-name: MyScheduler
+    auto-startup: true
+    wait-for-jobs-to-complete-on-shutdown: true
+#    jdbc or memory
+    job-store-type: memory
+#    스키마 저장소 초기화 여부
+    jdbc:
+      initialize-schema: jdbc
+  task:
+    execution:
+      pool:
+        max-size: 16
+        queue-capacity: 100
+        keep-alive: 10s
+
+---
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost:9092/~/test
+    data-username: sa
+    data-password:
+    platform: h2
+
+---
+spring:
+  h2:
+    console:
+      enabled: false
+---
+spring:
+  jpa:
+    database-platform: H2
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+---
